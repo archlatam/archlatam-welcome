@@ -1,0 +1,24 @@
+# Entorno virtual de Python
+.venv/
+venv/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+
+# Archivos generados por makepkg
+src/
+pkg/
+*.pkg.tar.zst
+*.pkg.tar.xz
+*.pkg.tar.gz
+*.pkg.tar
+*.sig
+
+# Metadatos generados por makepkg
+.SRCINFO
+
+# Cachés y archivos temporales
+*.log
+.cache/
+

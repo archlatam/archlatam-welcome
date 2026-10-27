@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ArchLatam Welcome
+Comment=Welcome to ArchLatam Live
+Exec=/usr/bin/archlatam-welcome
+Terminal=false
+OnlyShowIn=KDE;
+X-KDE-autostart-after=panel
