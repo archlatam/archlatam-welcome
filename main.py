@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ArchLatam Welcome — estilo inspirado en omabox.app
+ArchLatam Welcome — app de bienvenida
 App de bienvenida para la ISO live.
 """
 
@@ -43,7 +43,7 @@ ICON_BG = "#33421c"  # verde musgo oscuro del icono
 ASSET_DIR = Path(__file__).resolve().parent
 ICON_SIZES = (16, 22, 24, 32, 48, 64, 128, 256, 512)
 
-# Colores estilo omabox
+# Colores de la paleta
 BG = "#0b0c13"
 BG_ELEVATED = "#12141c"
 BG_CARD = "#151822"

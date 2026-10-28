@@ -12,7 +12,7 @@ install="$pkgname.install"
 
 source=('main.py' 'archlatam-welcome.desktop' 'LICENSE' 'archlatam-welcome-autostart.desktop')
 sha256sums=(
-  'd7d20f783e37c7730fb9cca59b31ee154788ccecb4f2b9053362ac407cf18738'
+  '771e51170bc0644d0147b526084d41c8b3f10a3cee21c219133bffb496b9ec4c'
   '15820138c9e650906ab1d57e93ff6a6e42cdb285131fd3ec8720db50d77b8735'
   'fb981668c18a279e285fc4d83fba1e836cc84dd4daa73c9697d3cfd2d8aca6e0'
   '79d22db36d9a5dd4ec8833595a6cb62954155c5671a88ab7eede9eb272a6097e'

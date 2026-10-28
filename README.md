@@ -1,8 +1,8 @@
-# ArchLatam Welcome — estilo omabox
+# ArchLatam Welcome
 
 <img src="preview.png" alt="Vista previa de ArchLatam Welcome" width="640">
 
-Versión rediseñada de [archlatam/archlatam-welcome](https://github.com/archlatam/archlatam-welcome) con la estética de [omabox.app](https://omabox.app/):
+Versión rediseñada de [archlatam/archlatam-welcome](https://github.com/archlatam/archlatam-welcome) con un diseño oscuro propio:
 
 - Fondo profundo `#0b0c13`
 - Acento verde neón `#b8f55a`
