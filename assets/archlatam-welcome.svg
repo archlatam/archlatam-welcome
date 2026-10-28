@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ArchLatam Welcome — marca: cuadrado redondeado con centro verde musgo
+     oscuro y borde #b8f55a, sin texto. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"
+     viewBox="0 0 512 512" version="1.1">
+  <rect x="28" y="28" width="456" height="456" rx="112" ry="112"
+        fill="#33421c" stroke="#b8f55a" stroke-width="56"/>
+</svg>
