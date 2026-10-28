@@ -1,5 +1,7 @@
 # ArchLatam Welcome — estilo omabox
 
+<img src="preview.png" alt="Vista previa de ArchLatam Welcome" width="640">
+
 Versión rediseñada de [archlatam/archlatam-welcome](https://github.com/archlatam/archlatam-welcome) con la estética de [omabox.app](https://omabox.app/):
 
 - Fondo profundo `#0b0c13`
@@ -103,6 +105,7 @@ Esto instala:
 
 | Archivo | Descripción |
 |---------|-------------|
+| `preview.png` | Captura de la ventana (usada en este README) |
 | `main.py` | App rediseñada |
 | `assets/archlatam-welcome.svg` | Fuente de la marca (icono) |
 | `assets/archlatam-welcome-*.png` | Render 16→512 para el tema hicolor |
