@@ -52,9 +52,9 @@ BORDER_STRONG = "rgba(255, 255, 255, 0.16)"
 TEXT = "#e8eaf0"
 TEXT_MUTED = "#8b90a0"
 TEXT_DIM = "#5c6170"
-ACCENT = "#b8f55a"
-ACCENT_HOVER = "#c8ff6e"
-ACCENT_SOFT = "rgba(184, 245, 90, 0.12)"
+ACCENT = "#9ece6a"
+ACCENT_HOVER = "#b3e07a"
+ACCENT_SOFT = "rgba(158, 206, 106, 0.12)"
 
 LINKS = {
     "web": "https://archlatam.github.io",
@@ -307,7 +307,7 @@ class WelcomeWindow(QMainWindow):
             QLabel {{
                 color: {ACCENT};
                 background-color: {ACCENT_SOFT};
-                border: 1px solid rgba(184, 245, 90, 0.28);
+                border: 1px solid rgba(158, 206, 106, 0.28);
                 border-radius: 999px;
                 padding: 5px 14px;
                 font-size: 12px;
@@ -377,7 +377,7 @@ class WelcomeWindow(QMainWindow):
                 background-color: {ACCENT_HOVER};
             }}
             QPushButton:pressed {{
-                background-color: #a8e04a;
+                background-color: #8fc45a;
             }}
         """)
         self.install_button.clicked.connect(self.launch_calamares)
@@ -473,7 +473,7 @@ class WelcomeWindow(QMainWindow):
                 min-height: 18px;
             }}
             QComboBox:hover {{
-                border: 1px solid rgba(255, 255, 255, 0.24);
+                border: 1px solid rgba(255, 255, 255, 0.22);
             }}
             QComboBox::drop-down {{
                 border: none;
