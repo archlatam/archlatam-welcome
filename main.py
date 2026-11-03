@@ -4,10 +4,7 @@ ArchLatam Welcome — app de bienvenida
 App de bienvenida para la ISO live.
 """
 
-import configparser
 import os
-import re
-import shlex
 import shutil
 import sys
 from pathlib import Path
@@ -49,7 +46,6 @@ BG_ELEVATED = "#12141c"
 BG_CARD = "#151822"
 BORDER = "rgba(255, 255, 255, 0.10)"
 BORDER_STRONG = "rgba(255, 255, 255, 0.16)"
-TEXT = "#e8eaf0"
 TEXT_MUTED = "#8b90a0"
 TEXT_DIM = "#5c6170"
 ACCENT = "#9ece6a"
@@ -75,8 +71,8 @@ TEXT = {
         "web": "Sitio web",
         "repo": "Código fuente",
         "language": "Idioma",
-        "missing": "No se encontró una entrada de Calamares.",
-        "failed": "No se pudo iniciar Calamares.",
+        "missing": "No se encontró el ejecutable archlatam-installer.",
+        "failed": "No se pudo iniciar archlatam-installer.",
         "title": "Bienvenido a ArchLatam",
         "badge": "ISO Live",
     },
@@ -92,8 +88,8 @@ TEXT = {
         "web": "Website",
         "repo": "Source code",
         "language": "Language",
-        "missing": "No Calamares desktop entry was found.",
-        "failed": "Could not start Calamares.",
+        "missing": "The archlatam-installer executable was not found.",
+        "failed": "Could not start archlatam-installer.",
         "title": "Welcome to ArchLatam",
         "badge": "Live ISO",
     },
@@ -109,52 +105,32 @@ TEXT = {
         "web": "Site",
         "repo": "Código-fonte",
         "language": "Idioma",
-        "missing": "Não foi encontrada uma entrada do Calamares.",
-        "failed": "Não foi possível iniciar o Calamares.",
+        "missing": "O executável archlatam-installer não foi encontrado.",
+        "failed": "Não foi possível iniciar archlatam-installer.",
         "title": "Bem-vindo ao ArchLatam",
         "badge": "ISO Live",
     },
 }
 
 
-def find_calamares_entry():
-    override = os.environ.get("CALAMARES_DESKTOP_FILE")
+def find_installer():
+    """Busca el script archlatam-installer (que abre Calamares)."""
+    override = os.environ.get("ARCHLATAM_INSTALLER")
     candidates = ([Path(override)] if override else []) + [
-        Path("/usr/share/applications/calamares.desktop"),
-        Path("/usr/local/share/applications/calamares.desktop"),
+        Path("/usr/local/bin/archlatam-installer"),
+        Path("/usr/bin/archlatam-installer"),
+        Path("/usr/local/sbin/archlatam-installer"),
+        Path("/usr/sbin/archlatam-installer"),
     ]
 
+    # También buscar en PATH
+    which = shutil.which("archlatam-installer")
+    if which:
+        candidates.insert(0, Path(which))
+
     for path in candidates:
-        if not path.is_file():
-            continue
-
-        parser = configparser.ConfigParser(interpolation=None, strict=False)
-        try:
-            parser.read(path, encoding="utf-8")
-            entry = parser["Desktop Entry"]
-            if entry.get("Hidden", "false").lower() == "true":
-                continue
-            if entry.get("NoDisplay", "false").lower() == "true":
-                continue
-            if entry.get("Type", "Application") != "Application":
-                continue
-
-            command = entry.get("Exec", "").strip()
-            if not command:
-                continue
-
-            command = re.sub(r"%[fFuUdDnNickvm]", "", command)
-            parts = shlex.split(command)
-            if not parts:
-                continue
-
-            executable = parts[0]
-            if not (executable.startswith("/") or shutil.which(executable)):
-                continue
-
-            return executable, parts[1:]
-        except (OSError, KeyError, ValueError):
-            continue
+        if path and path.is_file() and os.access(path, os.X_OK):
+            return str(path), []
 
     return None
 
@@ -219,12 +195,7 @@ def app_icon():
 
 
 def desktop_entry_available():
-    """¿Existe un .desktop válido con nuestro app id?
-
-    Sin él, el portal no puede registrar la app y Qt escupe
-    "App info not found for 'archlatam-welcome'". Solo lo asociamos cuando
-    está realmente instalado.
-    """
+    """Comprueba si existe un .desktop válido con nuestro app id."""
     data_home = Path(os.environ.get("XDG_DATA_HOME") or Path.home() / ".local/share")
     data_dirs = os.environ.get("XDG_DATA_DIRS") or "/usr/local/share:/usr/share"
 
@@ -525,12 +496,12 @@ class WelcomeWindow(QMainWindow):
             button.setText(t[key])
 
     def launch_calamares(self):
-        entry = find_calamares_entry()
-        if not entry:
+        installer = find_installer()
+        if not installer:
             QMessageBox.warning(self, APP_NAME, TEXT[self.language]["missing"])
             return
 
-        program, arguments = entry
+        program, arguments = installer
         ok, _pid = QProcess.startDetached(program, arguments)
         if ok:
             self.hide()
